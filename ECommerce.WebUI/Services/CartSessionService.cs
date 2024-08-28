@@ -1,4 +1,5 @@
 ﻿using ECommerce.Entity.Concretes;
+using ECommerce.WebUI.Consts;
 using ECommerce.WebUI.Extentions;
 
 namespace ECommerce.WebUI.Services
@@ -13,11 +14,11 @@ namespace ECommerce.WebUI.Services
 
         public Cart GetCart()
         {
-            Cart checkCart= context.HttpContext.Session.GetObject<Cart>("cart");
+            Cart checkCart= context.HttpContext.Session.GetObject<Cart>(WebUIConstants.CartName);
             if (checkCart == null)
             {
-                context.HttpContext.Session.SetObject("cart",new Cart());
-                checkCart= context.HttpContext.Session.GetObject<Cart>("cart");
+                context.HttpContext.Session.SetObject(WebUIConstants.CartName,new Cart());
+                checkCart= context.HttpContext.Session.GetObject<Cart>(WebUIConstants.CartName);
 
             }
             return checkCart;
@@ -25,7 +26,7 @@ namespace ECommerce.WebUI.Services
 
         public void SetCart(Cart cart)
         {
-           context.HttpContext.Session.SetObject("cart",cart);
+           context.HttpContext.Session.SetObject(WebUIConstants.CartName,cart);
         }
     }
 }

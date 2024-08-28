@@ -44,9 +44,31 @@ namespace ECommerce.WebUI.Controllers
             var cart = _sessionService.GetCart();
             _cartService.DeleteList(productId,cart);
             _sessionService.SetCart(cart);
-			//TempData.Add("message", "Your Product removed successfully from cart");
+			TempData.Add("message", "Your Product removed successfully from cart");
 
 			return RedirectToAction("List");
         }
-    }
+        [HttpGet]
+        public IActionResult Complete()
+        {
+            var list = new ShippingDetailViewModel
+            {
+                ShippingDetails = new ShippingDetail()
+            };
+            return View(list);
+        }
+
+		[HttpPost]
+		public IActionResult Complete(ShippingDetailViewModel shippingDetail)
+		{
+			if (!ModelState.IsValid)
+			{
+				return View(shippingDetail);
+			}
+			TempData.Add("message", String.Format("Thank you {0} , you order is in Progress", shippingDetail.ShippingDetails.FirstName));
+
+
+			return RedirectToAction("List");
+		}
+	}
 }

@@ -22,7 +22,12 @@ else
 		<tbody>
 			@foreach (var item in Model.Product)
 			{
-				<tr>
+				var style = "";
+				if (item.UnitsInStock == 0)
+				{
+					style = "background-color:indianred";
+				}
+				<tr style="@style">
 					<td>
 						@item.ProductName
 					</td>
@@ -32,12 +37,13 @@ else
 					<td>
 						@item.UnitsInStock
 					</td>
-					<td>
-					<td>
-						<a class="btn btn-xs btn-success"
-						   href="/Cart/AddToCart?productId=@item.ProductId&page=@Model.CurrentPage&category=@Model.CurrentCategory">Add To Cart</a>
-					</td>
-					</td>
+					<td> 
+						@if (style=="")
+						{
+							<a class="btn btn-xs btn-success"
+							   href="/Cart/AddToCart?productId=@item.ProductId&page=@Model.CurrentPage&category=@Model.CurrentCategory">Add To Cart</a>
+						} 
+					</td> 
 				</tr>
 			}
 		</tbody>
