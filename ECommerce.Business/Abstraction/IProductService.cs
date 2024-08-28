@@ -16,6 +16,7 @@ namespace ECommerce.Business.Abstraction
 		Task DeleteAsync(int id);
 		Task DeleteForCategoryId(int categoryId); 
 		Task<Product> GetByIdAsync(int id);
+
 		 
 	}
 }

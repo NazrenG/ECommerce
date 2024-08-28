@@ -20,9 +20,33 @@
             <td>@item.Product.UnitPrice</td>
             <td>@item.Product.UnitsInStock</td>
             <td>
+                <div style="display: flex; align-items: center;">
+                    @if (item.Quantity > 1)
+                    {
+                        <form method="post" asp-action="Decrement" asp-controller="Cart" style="margin-right: 5px;">
+                            <input type="hidden" name="id" value="@item.Product.ProductId" />
+                            <button type="submit" class="btn btn-primary" style="width:35px;text-align:center;border-radius:50%;padding:5px 10px;font-weight:bold;">-</button>
+                        </form>
+                    }
+                    else
+                    {
+                        <button class="btn btn-secondary" style="width:35px;text-align:center;border-radius:50%;padding:5px 10px;font-weight:bold;margin-right: 5px;">-</button>
+                    }
 
-                @item.Quantity
+                    <span style="margin-right: 5px;">@item.Quantity</span>
 
+                    @if (item.Quantity < item.Product.UnitsInStock)
+                    {
+                        <form method="post" asp-action="Increment" asp-controller="Cart">
+                            <input type="hidden" name="id" value="@item.Product.ProductId" />
+                            <button type="submit" class="btn btn-primary" style="width:35px;text-align:center;border-radius:50%;padding:5px 10px;font-weight:bold;">+</button>
+                        </form>
+                    }
+                    else
+                    {
+                        <button class="btn btn-secondary" style="width:35px;text-align:center;border-radius:50%;padding:5px 10px;font-weight:bold;">+</button>
+                    }
+                </div>
             </td>
             <td class="text-right">
                 <a class="btn btn-xs btn-danger" asp-controller="Cart"

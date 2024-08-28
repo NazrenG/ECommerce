@@ -23,8 +23,9 @@ namespace ECommerce.Business.Concrete
 		{
 			  await _productDal.Add(product);
 		}
+		 
 
-		public async Task DeleteAsync(int id)
+        public async Task DeleteAsync(int id)
 		{
 			var deletedItem= await _productDal.Get(c=>c.ProductId==id);
 			await _productDal.Delete(deletedItem);
@@ -44,8 +45,6 @@ namespace ECommerce.Business.Concrete
 
         }
 
-       
-
         public Task<List<Product>> GetAllByCategoryAsync(int categoryId)
 		{
 			return _productDal.GetList(p => p.CategoryId == categoryId || categoryId == 0);
@@ -61,7 +60,6 @@ namespace ECommerce.Business.Concrete
 			return await _productDal.Get(p => p.ProductId == id);
 		}
 		 
-        
 
         public async Task UpdateAsync(Product product)
 		{

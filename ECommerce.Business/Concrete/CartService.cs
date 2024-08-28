@@ -25,6 +25,17 @@ namespace ECommerce.Business.Concrete
             } 
         }
 
+        public void Decrement(int productId, Cart cart)
+        {
+            CartLine cartLine = cart.Lines.FirstOrDefault(c => c.Product.ProductId == productId);
+            if (cartLine != null)
+            {
+                if (cartLine.Quantity >1) { 
+                    cartLine.Quantity--;
+                }
+            }
+        }
+
         public void DeleteList(int productId, Cart cart)
         {
             CartLine cartLine = cart.Lines.FirstOrDefault(c=>c.Product.ProductId == productId);
@@ -37,6 +48,17 @@ namespace ECommerce.Business.Concrete
         public List<CartLine> GetList(Cart cart)
         {
             return cart.Lines;
+        }
+
+        public void Increment(int productId, Cart cart)
+        {
+            CartLine cartLine = cart.Lines.FirstOrDefault(c => c.Product.ProductId == productId);
+            if (cartLine != null)
+            {
+                 
+                    cartLine.Quantity++;
+                
+            }
         }
     }
 }
