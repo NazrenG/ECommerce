@@ -18,7 +18,7 @@ namespace ECommerce.WebUI.Controllers
 			string orderByPrice = "",string controllerName="product")
 		{
 			var list = await _productService.GetAllByCategoryAsync(category);
-			int pageSize = 10;
+			int pageSize = 8;
 
 			if (orderByName == "asc")
 				list = list.OrderBy(p => p.ProductName).ToList();
@@ -49,6 +49,11 @@ namespace ECommerce.WebUI.Controllers
 
 			return View(productList);
 		} 
+		public async Task<IActionResult> GetProducts()
+		{
+			var list =await _productService.GetAlLProductAsync();
+			return Json(list);
+		}
 
 
 	}
