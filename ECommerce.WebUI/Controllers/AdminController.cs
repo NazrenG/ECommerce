@@ -2,12 +2,14 @@
 using ECommerce.Entity.Models;
 using ECommerce.WebUI.Models;
 using ECommerce.WebUI.ViewComponents;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 
 namespace ECommerce.WebUI.Controllers
 {
+    [Authorize ]
     public class AdminController : Controller
     {
         private readonly IProductService _productService;
